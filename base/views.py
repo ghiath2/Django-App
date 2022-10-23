@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from .models import Task
 
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CustomLoginView(LoginView):
@@ -17,7 +18,7 @@ class CustomLoginView(LoginView):
         return reverse_lazy('tasks')
 
 
-class TaskList(ListView):
+class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
 
